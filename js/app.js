@@ -1,12 +1,12 @@
 // Deck card values
-let cities = ['Chicago', 'Los Angeles', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan', 'Chicago', 'Los Angeles', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan' ];
+let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan' ];
 let languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
 let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github','fa-amazon',
 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github']
 const itemsCount = 16;
 let openCards = [];
 // let timer;
-
+let clickEnabled = true;
 
 // Game Panel Controls
 const moves = document.querySelector('.moves');
@@ -82,6 +82,7 @@ function resetGame(){
 }
 
 
+
 function displaySeconds(){
 	timeInSeconds++;
 	timeDisplay.textContent = timeInSeconds;
@@ -98,11 +99,20 @@ function setStars(){
 	}
 }
 
+function incrementMoves(){
+	movesCount++;
+	if(movesCount >= 9){
+		setStars();
+	}
+	moves.textContent = movesCount;
+}
+
+
 function gameCompleted(){
 	clearInterval(timer);
 	modal.classList.add('show');
 	modalTime.textContent = `Game Completion Time: ${timeInSeconds} seconds`;
-	// xmodalStars =
+	// add html for star rating
 	let htmlString = "Rating: ";
 	for(let i = 1; i <= (3 - starCount); i++){
 		htmlString += '<i class="fa fa-star fa-star-o"></i>';
@@ -128,40 +138,42 @@ deck.addEventListener('click', function(event){
 	if(timeInSeconds === 0){
 		timer = setInterval(displaySeconds, 1000);
 	}
-	if(!event.target.classList.contains('matched')) {
+	if(!event.target.classList.contains('matched') && clickEnabled) {
 		if(event.target.classList.contains('card') && !event.target.classList.contains('open')){
-			if(openCards.length === 2){
-				movesCount++;
-				if(movesCount >= 9){
-					setStars();
-				}
-				moves.textContent = movesCount;
-				for(const card of openCards){
-					card.classList.remove('open');
-				}
-				openCards = [];
-			}
-			openCards.push(event.target);
 			event.target.classList.add('open');
 			event.target.firstElementChild.classList.add('mirror');
-			console.log(openCards.length);
-			//matched
-			if(openCards.length === 2 && (openCards[0].textContent === openCards[1].textContent)){
-				movesCount++;
-				if(movesCount >= 9){
-					setStars();
+			openCards.push(event.target);
+
+			// experiment with timeout
+			if(openCards.length === 2){
+				incrementMoves();
+				// matched
+				if(openCards[0].textContent === openCards[1].textContent){
+					for(const card of openCards){
+						card.classList.add('matched');
+					}
+					//check for winning condition
+					if(matched.length == itemsCount){
+						gameCompleted();
+						console.log('game over');
+					}
+					openCards = [];
 				}
-				moves.textContent = movesCount;
-				for(const card of openCards){
-					card.classList.add('matched');
+				// not matched, close open cards with a delay
+				else {
+					clickEnabled = false;
+					let timerId = setTimeout(function(){
+						for(const card of openCards){
+						card.classList.remove('open');
+						}
+					openCards = [];
+					clickEnabled = true;
+					}, 1400);
 				}
-				//check for winning condition
-				if(matched.length == itemsCount){
-					gameCompleted();
-					console.log('game over');
-				}
-				openCards = [];
+
 			}
+// experiemnt ends
+
 		}
 	}
 });
