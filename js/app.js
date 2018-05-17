@@ -138,8 +138,7 @@ deck.addEventListener('click', function(event){
 	if(timeInSeconds === 0){
 		timer = setInterval(displaySeconds, 1000);
 	}
-	if(!event.target.classList.contains('matched') && clickEnabled) {
-		if(event.target.classList.contains('card') && !event.target.classList.contains('open')){
+	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card')) {
 			event.target.classList.add('open');
 			event.target.firstElementChild.classList.add('mirror');
 			openCards.push(event.target);
@@ -172,15 +171,13 @@ deck.addEventListener('click', function(event){
 				}
 
 			}
-// experiemnt ends
-
-		}
+			// experiemnt ends
 	}
 });
 
-reset.addEventListener('click', function(){
+reset.onclick =  function(){
 	resetGame();
-});
+}
 
 // Modal related event listeners
 // When the user clicks on No <button>, close the modal
