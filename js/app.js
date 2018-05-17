@@ -104,6 +104,10 @@ function gameCompleted(){
 	modalTime.textContent = `Game Completion Time: ${timeInSeconds} seconds`;
 	// xmodalStars =
 	let htmlString = "Rating: ";
+	for(let i = 1; i <= (3 - starCount); i++){
+		htmlString += '<i class="fa fa-star fa-star-o"></i>';
+
+	}
 	for(let i = 1; i <= starCount; i++){
 		htmlString += '<i class="fa fa-star"></i>';
 
