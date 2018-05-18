@@ -1,5 +1,6 @@
 // Deck card values
 let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan' ];
+// TODO:Randomly pick between these three arrays to fill deck
 let languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
 let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github','fa-amazon',
 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github']
@@ -88,11 +89,11 @@ function displaySeconds(){
 }
 
 function setStars(){
-	if(movesCount === 18) {
+	if(movesCount === 19) {
 		stars[1].classList.add('fa-star-o');
 		starCount--;
 	}
-	else if(movesCount === 12) {
+	else if(movesCount === 13) {
 		stars[0].classList.add('fa-star-o');
 		starCount--;
 	}

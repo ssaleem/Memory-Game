@@ -11,12 +11,12 @@ html {
 body {
 	background: url('../img/yellow.png');
 	text-align: center;
-	color: #1A2930;
-	font-family: 'Jura', sans-serif;
+	color: #1a2930;
+	font-family: "Jura", sans-serif;
 }
 
 h1 {
-	font-family: 'Lilita One', cursive;
+	font-family: "Lilita One", cursive;
 	font-size: calc(20px + 3vw);
 	margin-bottom: 0;
 	margin-top: 15px;
@@ -33,12 +33,12 @@ h1 {
 .panel-ietm {
 	float: left;
 	width: 25%;
-	font-size:calc(14px + 0.6vw);
+	font-size: calc(14px + 0.6vw);
 }
 
 .deck {
 	flex-wrap: wrap;
-	background-color: #D3CECF;
+	background-color: #d3cecf;
 	border-radius: 8px;
 	justify-content: space-between;
 	max-height: 550px;
@@ -54,20 +54,19 @@ h1 {
 	max-width: 120px;
 	font-size: calc(12px + 0.5vw);
 	border-radius: 6px;
-	background-color: #1A2930;
+	background-color: #1a2930;
 	color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: 'Jura', sans-serif;
+	font-family: "Jura", sans-serif;
 	transition: transform 0.5s, background-color 1.5s;
 }
 
 .card.open {
-	background-color: #406C84;
+	background-color: #406c84;
 	-webkit-transform: rotateY(180deg); /* Safari */
 	transform: rotateY(180deg);
-
 }
 
 .card-text {
@@ -81,7 +80,7 @@ h1 {
 }
 
 .card.matched {
-	background-color: #0A1612;
+	background-color: #0a1612;
 }
 
 .win-modal {
@@ -94,7 +93,7 @@ h1 {
 	width: 100%;
 	height: 100%;
 	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: black; /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
@@ -109,7 +108,6 @@ h1 {
 	border: 1px solid #888;
 	width: 80%;
 	max-width: 500px;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .modal-button:hover,
@@ -120,7 +118,7 @@ h1 {
 
 .modal-header {
 	padding: 4px;
-	background-color: #0A1612;
+	background-color: #0a1612;
 	color: white;
 }
 
@@ -129,10 +127,10 @@ h1 {
 }
 
 .modal-button {
-	background-color: #0A1612;
+	background-color: #0a1612;
 	color: white;
 	min-height: 48px;
-	min-width:  48px;
+	min-width: 48px;
 	padding: 1.5em;
 }
 
@@ -140,11 +138,11 @@ h1 {
 	.time,
 	.star,
 	.moves-h {
-		width:30%;
+		width: 30%;
 	}
 
 	.reset {
-		width: 10%
+		width: 10%;
 	}
 
 }
