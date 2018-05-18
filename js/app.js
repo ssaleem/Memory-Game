@@ -3,7 +3,7 @@ let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', '
 // TODO:Randomly pick between these three arrays to fill deck
 let languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
 let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github','fa-amazon',
-'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github']
+'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github'];
 const itemsCount = 16;
 let openCards = [];
 let timer;
@@ -24,7 +24,7 @@ const cardTexts = document.getElementsByClassName('card-text');
 
 // Live collection of open and matched cards
 const matched = document.getElementsByClassName('matched');
-const open = document.getElementsByClassName('open');
+const openClassElements = document.getElementsByClassName('open');
 
 // Game completed Modal
 const modal = document.querySelector('.win-modal');
@@ -57,9 +57,9 @@ function loadDeck(){
 function resetGame(){
 	// 1. Clear last deck
 	// use live collection of elements with open/matched classes and remove those classes
-	while(open[0]) {
-		open[0].firstElementChild.classList.remove('mirror');
-		open[0].classList.remove('open','matched');
+	while(openClassElements[0]) {
+		openClassElements[0].firstElementChild.classList.remove('mirror');
+		openClassElements[0].classList.remove('open','matched');
 	}
 	// clear the openCards array in case game was reset in the middle of play
 	openCards = [];
@@ -177,23 +177,23 @@ deck.addEventListener('click', function(event){
 
 reset.onclick =  function(){
 	resetGame();
-}
+};
 
 // Modal related event listeners
 // a.When the user clicks on No <button>, close the modal
 modalNo.onclick = function() {
 	modal.classList.remove('show');
-}
+};
 
 // b.When the user clicks on Yes <button>, close the modal, restart the game
 modalYes.onclick = function() {
 	modal.classList.remove('show');
 	resetGame();
-}
+};
 
 // c.When the user clicks anywhere outside of the modal, close the modal
 window.onclick = function(event) {
 	if (event.target == modal) {
 		modal.classList.remove('show');
 	}
-}
+};
