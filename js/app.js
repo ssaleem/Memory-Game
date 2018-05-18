@@ -54,7 +54,6 @@ function loadDeck(){
 }
 
 function resetGame(){
-	//reset game here
 	// 1. Clear last deck
 	// use live collection of elements with open/matched classes and remove those classes
 	while(open[0]) {
@@ -76,6 +75,7 @@ function resetGame(){
 	// set moves to 0
 	movesCount = 0;
 	moves.textContent = movesCount;
+
 	// set timer to 0
 	timeInSeconds = 0;
 	clearInterval(timer);
@@ -88,11 +88,11 @@ function displaySeconds(){
 }
 
 function setStars(){
-	if(movesCount === 16) {
+	if(movesCount === 18) {
 		stars[1].classList.add('fa-star-o');
 		starCount--;
 	}
-	else if(movesCount === 10) {
+	else if(movesCount === 12) {
 		stars[0].classList.add('fa-star-o');
 		starCount--;
 	}
