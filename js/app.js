@@ -58,6 +58,7 @@ function resetGame(){
 	// 1. Clear last deck
 	// use live collection of elements with open/matched classes and remove those classes
 	while(open[0]) {
+		open[0].firstElementChild.classList.remove('mirror');
 		open[0].classList.remove('open','matched');
 	}
 	// clear the openCards array in case game was reset in the middle of play
@@ -81,19 +82,17 @@ function resetGame(){
 	timeDisplay.textContent = timeInSeconds;
 }
 
-
-
 function displaySeconds(){
 	timeInSeconds++;
 	timeDisplay.textContent = timeInSeconds;
 }
 
 function setStars(){
-	if(movesCount === 15) {
+	if(movesCount === 16) {
 		stars[1].classList.add('fa-star-o');
 		starCount--;
 	}
-	else if(movesCount === 9) {
+	else if(movesCount === 10) {
 		stars[0].classList.add('fa-star-o');
 		starCount--;
 	}
@@ -106,7 +105,6 @@ function incrementMoves(){
 	}
 	moves.textContent = movesCount;
 }
-
 
 function gameCompleted(){
 	clearInterval(timer);
@@ -143,7 +141,6 @@ deck.addEventListener('click', function(event){
 			event.target.firstElementChild.classList.add('mirror');
 			openCards.push(event.target);
 
-			// experiment with timeout
 			if(openCards.length === 2){
 				incrementMoves();
 				// matched
@@ -163,7 +160,8 @@ deck.addEventListener('click', function(event){
 					clickEnabled = false;
 					let timerId = setTimeout(function(){
 						for(const card of openCards){
-						card.classList.remove('open');
+							card.classList.remove('open');
+							card.firstElementChild.classList.remove('mirror');
 						}
 					openCards = [];
 					clickEnabled = true;
@@ -171,7 +169,6 @@ deck.addEventListener('click', function(event){
 				}
 
 			}
-			// experiemnt ends
 	}
 });
 
@@ -180,18 +177,18 @@ reset.onclick =  function(){
 }
 
 // Modal related event listeners
-// When the user clicks on No <button>, close the modal
+// a.When the user clicks on No <button>, close the modal
 modalNo.onclick = function() {
 	modal.classList.remove('show');
 }
 
-// When the user clicks on Yes <button>, close the modal, restart the game
+// b.When the user clicks on Yes <button>, close the modal, restart the game
 modalYes.onclick = function() {
 	modal.classList.remove('show');
 	resetGame();
 }
 
-// When the user clicks anywhere outside of the modal, close the modal
+// c.When the user clicks anywhere outside of the modal, close the modal
 window.onclick = function(event) {
 	if (event.target == modal) {
 		modal.classList.remove('show');
