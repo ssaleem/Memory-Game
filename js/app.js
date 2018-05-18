@@ -139,7 +139,7 @@ deck.addEventListener('click', function(event){
 		timer = setInterval(displaySeconds, 1000);
 		console.log('timer:' +timer);
 	}
-	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card')) {
+	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card') && !event.target.classList.contains('open')) {
 			event.target.classList.add('open');
 			event.target.firstElementChild.classList.add('mirror');
 			openCards.push(event.target);
