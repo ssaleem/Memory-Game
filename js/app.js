@@ -6,7 +6,7 @@ let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 
 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github']
 const itemsCount = 16;
 let openCards = [];
-// let timer;
+let timer;
 let clickEnabled = true;
 
 // Game Panel Controls
@@ -79,6 +79,7 @@ function resetGame(){
 
 	// set timer to 0
 	timeInSeconds = 0;
+	console.log('timer:' +timer);
 	clearInterval(timer);
 	timeDisplay.textContent = timeInSeconds;
 }
@@ -136,6 +137,7 @@ deck.addEventListener('click', function(event){
 	// start timer if it already is not running
 	if(timeInSeconds === 0){
 		timer = setInterval(displaySeconds, 1000);
+		console.log('timer:' +timer);
 	}
 	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card')) {
 			event.target.classList.add('open');
