@@ -1,12 +1,12 @@
 // Deck card values
-let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houstan' ];
+let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston' ];
 // TODO:Randomly pick between these three arrays to fill deck
 let languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
 let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github','fa-amazon',
 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github'];
 const itemsCount = 16;
 let openCards = [];
-let timer;
+let intervalID = null;
 let clickEnabled = true;
 
 // Game Panel Controls
@@ -79,8 +79,9 @@ function resetGame(){
 
 	// set timer to 0
 	timeInSeconds = 0;
-	console.log('timer:' +timer);
-	clearInterval(timer);
+	console.log('timer value in reset function:' + intervalID);
+	clearInterval(intervalID);
+	intervalID = null;
 	timeDisplay.textContent = timeInSeconds;
 }
 
@@ -109,7 +110,8 @@ function incrementMoves(){
 }
 
 function gameCompleted(){
-	clearInterval(timer);
+	clearInterval(intervalID);
+	intervalID = null;
 	modal.classList.add('show');
 	modalTime.textContent = `Game Completion Time: ${timeInSeconds} seconds`;
 	// add html for star rating
@@ -135,9 +137,9 @@ document.addEventListener('DOMContentLoaded', function () {
 deck.addEventListener('click', function(event){
 	event.preventDefault();
 	// start timer if it already is not running
-	if(timeInSeconds === 0){
-		timer = setInterval(displaySeconds, 1000);
-		console.log('timer:' +timer);
+	if(!intervalID){
+		intervalID = setInterval(displaySeconds, 1000);
+		console.log('timer value in click event listener:' + intervalID);
 	}
 	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card') && !event.target.classList.contains('open')) {
 			event.target.classList.add('open');
