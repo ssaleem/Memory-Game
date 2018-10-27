@@ -11,6 +11,9 @@ let clickEnabled = true;
 
 // Game Panel Controls
 const selectDeck = document.querySelector('.select-deck');
+// Deck selection
+let selectedDeck = document.querySelector('.selected');
+let deckItems = cities;
 
 const moves = document.querySelector('.moves');
 let movesCount = 0;
@@ -28,14 +31,28 @@ const cardTexts = document.getElementsByClassName('card');
 const matched = document.getElementsByClassName('matched');
 const openClassElements = document.getElementsByClassName('open');
 
+// Fastest Time
+const fastest = document.querySelector('.fastest');
+const fastestTimeSpan = document.getElementById('fastest-time');
+let storageAvailable = false;
+
 // Game completed Modal
 const modal = document.querySelector('.win-modal');
 const modalTime = document.querySelector('.modal-time');
 const modalStars = document.querySelector('.modal-stars');
 const modalYes = document.querySelector('.modal-yes');
 const modalNo = document.querySelector('.modal-no');
-let selectedDeck = document.querySelector('.selected');
-let deckItems = cities;
+
+
+
+// Check if localStorage is available and fastestTime is stored already
+if (typeof(Storage) !== "undefined") {
+    storageAvailable = true;
+    if(localStorage.fastestTime){
+    	fastestTimeSpan.innerHTML = localStorage.fastestTime;
+    	fastest.classList.add('show');
+    }
+}
 
 function shuffle(items){
 	for(let index = 0; index < itemsCount; index++){
@@ -82,7 +99,8 @@ function resetGame(){
 	//reset stars
 	starCount = 3;
 	for(const star of stars){
-		star.classList.remove('fa-star-o');
+		star.classList.remove('far');
+		star.classList.add('fas');
 	}
 	// set moves to 0
 	movesCount = 0;
@@ -90,7 +108,7 @@ function resetGame(){
 
 	// set timer to 0
 	timeInSeconds = 0;
-	console.log('timer value in reset function:' + intervalID);
+	// console.log('timer value in reset function:' + intervalID);
 	clearInterval(intervalID);
 	intervalID = null;
 	timeDisplay.textContent = timeInSeconds;
@@ -102,7 +120,6 @@ function displaySeconds(){
 }
 
 function setStars(){
-	console.log(stars);
 	if(movesCount === 18) {
 		stars[1].classList.remove('fas');
 		stars[1].classList.add("far");
@@ -126,16 +143,26 @@ function incrementMoves(){
 function gameCompleted(){
 	clearInterval(intervalID);
 	intervalID = null;
+	// check if fastest time was beaten and update
+	if(localStorage.fastestTime && localStorage.fastestTime > timeInSeconds){
+		localStorage.fastestTime = timeInSeconds;
+	}
+	else {
+		localStorage.fastestTime = timeInSeconds;
+	}
+	fastestTimeSpan.innerHTML = localStorage.fastestTime;
+	fastest.classList.add('show');
+
+	//show modal
 	modal.classList.add('show');
 	modalTime.textContent = `Game Completion Time: ${timeInSeconds} seconds`;
 	// add html for star rating
 	let htmlString = "Rating: ";
-	for(let i = 1; i <= (3 - starCount); i++){
-		htmlString += '<i class="far fa-star"></i>';
-
-	}
 	for(let i = 1; i <= starCount; i++){
 		htmlString += '<i class="fas fa-star"></i>';
+	}
+	for(let i = 1; i <= (3 - starCount); i++){
+		htmlString += '<i class="far fa-star"></i>';
 	}
 	modalStars.innerHTML = htmlString;
 
@@ -173,7 +200,7 @@ deck.addEventListener('click', function(event){
 	// start timer if it already is not running
 	if(!intervalID){
 		intervalID = setInterval(displaySeconds, 1000);
-		console.log('timer value in click event listener:' + intervalID);
+		// console.log('timer value in click event listener:' + intervalID);
 	}
 	if(!event.target.classList.contains('matched') && clickEnabled && event.target.classList.contains('card') && !event.target.classList.contains('open')) {
 			event.target.classList.add('open');
