@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"> -->
+	<link rel="stylesheet prefetch" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 	<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Jura:400,500%7CLilita+One">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Memory Game</title>
@@ -13,69 +14,60 @@
 		<h1>Memory Game</h1>
 	</header>
 	<section class="container">
-		<h3 class="moves-h panel-ietm">Moves: <span class="moves">0</span></h3>
-		<div class="star panel-ietm">
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
-			<i class="fa fa-star"></i>
+		<h3 class="select-deck">
+			<span>Select Deck:</span>
+			<i class="fas fa-building clickable selected"></i>
+			<i class="fas fa-language clickable"></i>
+			<i class="fas fa-bus clickable"></i>
+			<i class="fas fa-cat clickable"></i>
+		</h3>
+		<h3 class="moves-h panel-item">Moves: <span class="moves">0</span></h3>
+		<div class="star panel-item">
+			<i class="fas fa-star"></i>
+			<i class="fas fa-star"></i>
+			<i class="fas fa-star"></i>
 		</div>
-		<div class="time panel-ietm">
-			<i class="fa fa-clock-o"></i>
+		<div class="time panel-item">
+			<i class="far fa-clock"></i>
 			<span class="time-display">0</span>
 		</div>
-		<div class="reset panel-ietm">
-			<i class="fa fa-repeat"></i>
+		<div class="reset panel-item">
+			<i class="fas fa-redo-alt clickable"></i>
 		</div>
 
 	</section>
 	<div class="deck container">
 		<div class="card">
-			<p class="card-text">blah</p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 		<div class="card">
-			<p class="card-text"></p>
 		</div>
 	</div>
 	<!--Game Over Modal-->
@@ -95,6 +87,7 @@
 		</div>
 
 	</div>
+	<footer><i class="far fa-copyright"></i> 2018 SARA SALEEM. ALL RIGHTS RESERVED</footer>
 	<script src="js/app.js"></script>
 </body>
 </html>

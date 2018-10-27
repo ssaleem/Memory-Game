@@ -1,15 +1,17 @@
 // Deck card values
-let cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston' ];
-// TODO:Randomly pick between these three arrays to fill deck
-let languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
-let brandIcons = ['fa-amazon', 'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github','fa-amazon',
-'fa-apple', 'fa-android', 'fa-btc', 'fa-chrome', 'fa-dropbox', 'fa-facebook-official', 'fa-github'];
+const cities = ['Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston', 'Chicago', 'Boston', 'Miami', 'Las Vegas', 'Atlanta', 'Seattle', 'New York', 'Houston' ];
+const languages = ['Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese', 'Arabic', 'Spanish', 'Portuguese', 'English', 'German', 'Russian', 'Hindi', 'Chinese' ];
+const vehicles = ["fa-car", "fa-bus", "fa-motorcycle", "fa-bicycle", "fa-subway", "fa-space-shuttle", "fa-taxi", "fa-fighter-jet", "fa-car", "fa-bus", "fa-motorcycle", "fa-bicycle", "fa-subway", "fa-space-shuttle", "fa-taxi", "fa-fighter-jet"]
+const animals = ["fa-cat", "fa-dog", "fa-crow", "fa-dragon", "fa-dove", "fa-fish", "fa-frog", "fa-spider", "fa-cat", "fa-dog", "fa-crow", "fa-dragon", "fa-dove", "fa-fish", "fa-frog", "fa-spider"];
+
 const itemsCount = 16;
 let openCards = [];
 let intervalID = null;
 let clickEnabled = true;
 
 // Game Panel Controls
+const selectDeck = document.querySelector('.select-deck');
+
 const moves = document.querySelector('.moves');
 let movesCount = 0;
 const stars = document.getElementsByClassName('fa-star');
@@ -20,7 +22,7 @@ let timeInSeconds = 0;
 
 // Main Deck
 const deck = document.querySelector('.deck');
-const cardTexts = document.getElementsByClassName('card-text');
+const cardTexts = document.getElementsByClassName('card');
 
 // Live collection of open and matched cards
 const matched = document.getElementsByClassName('matched');
@@ -32,7 +34,8 @@ const modalTime = document.querySelector('.modal-time');
 const modalStars = document.querySelector('.modal-stars');
 const modalYes = document.querySelector('.modal-yes');
 const modalNo = document.querySelector('.modal-no');
-
+let selectedDeck = document.querySelector('.selected');
+let deckItems = cities;
 
 function shuffle(items){
 	for(let index = 0; index < itemsCount; index++){
@@ -46,11 +49,19 @@ function shuffle(items){
 }
 
 function loadDeck(){
-	shuffle(cities);
+	shuffle(deckItems);
 	let item = 0;
-	for(const text of cardTexts){
-		text.textContent = cities[item];
-		item++;
+	if(deckItems[0].includes('fa-')){
+		for(const card of cardTexts){
+			card.innerHTML = `<i class="fas ${deckItems[item]} card-icon"></i>`;
+			item++;
+		}
+	}
+	else {
+		for(const card of cardTexts){
+			card.innerHTML = `<p class="card-text">${deckItems[item]}</p>`;
+			item++;
+		}
 	}
 }
 
@@ -91,12 +102,15 @@ function displaySeconds(){
 }
 
 function setStars(){
-	if(movesCount === 19) {
-		stars[1].classList.add('fa-star-o');
+	console.log(stars);
+	if(movesCount === 18) {
+		stars[1].classList.remove('fas');
+		stars[1].classList.add("far");
 		starCount--;
 	}
-	else if(movesCount === 13) {
-		stars[0].classList.add('fa-star-o');
+	else if(movesCount === 12) {
+		stars[2].classList.remove("fas");
+		stars[2].classList.add("far");
 		starCount--;
 	}
 }
@@ -117,12 +131,11 @@ function gameCompleted(){
 	// add html for star rating
 	let htmlString = "Rating: ";
 	for(let i = 1; i <= (3 - starCount); i++){
-		htmlString += '<i class="fa fa-star fa-star-o"></i>';
+		htmlString += '<i class="far fa-star"></i>';
 
 	}
 	for(let i = 1; i <= starCount; i++){
-		htmlString += '<i class="fa fa-star"></i>';
-
+		htmlString += '<i class="fas fa-star"></i>';
 	}
 	modalStars.innerHTML = htmlString;
 
@@ -132,6 +145,27 @@ function gameCompleted(){
 
 document.addEventListener('DOMContentLoaded', function () {
 	loadDeck();
+});
+
+selectDeck.addEventListener('click', function(event){
+	if(event.target.classList.contains('fas')){
+		selectedDeck.classList.remove("selected");
+		selectedDeck = event.target;
+		selectedDeck.classList.add("selected");
+	}
+	if(event.target.classList.contains('fa-building')){
+		deckItems = cities;
+	}
+	else if(event.target.classList.contains('fa-language')){
+		deckItems = languages;
+	}
+	else if(event.target.classList.contains('fa-bus')){
+		deckItems = vehicles;
+	}
+	else if(event.target.classList.contains('fa-cat')){
+		deckItems = animals;
+	}
+	resetGame();
 });
 
 deck.addEventListener('click', function(event){
@@ -149,7 +183,8 @@ deck.addEventListener('click', function(event){
 			if(openCards.length === 2){
 				incrementMoves();
 				// matched
-				if(openCards[0].textContent === openCards[1].textContent){
+				// if(openCards[0].textContent === openCards[1].textContent){
+				if(openCards[0].innerHTML === openCards[1].innerHTML){
 					for(const card of openCards){
 						card.classList.add('matched');
 					}

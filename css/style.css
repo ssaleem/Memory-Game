@@ -13,6 +13,8 @@ body {
 	text-align: center;
 	color: #1a2930;
 	font-family: "Jura", sans-serif;
+	padding: 0;
+	margin: 0;
 }
 
 h1 {
@@ -28,12 +30,35 @@ h1 {
 	width: 85vw;
 	margin: auto;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
-.panel-ietm {
+.select-deck {
+	border-radius: 6px;
+	padding: 4px;
+	width: 100%;
+	margin-bottom: 0;
+	background-color: #d3cecf
+}
+
+.selected {
+	border-bottom: #1a2930 solid 2px;
+}
+
+.select-deck > i {
+	font-size: 1.25em;
+	padding: 4px 8px;
+}
+
+.panel-item {
 	float: left;
 	width: 25%;
 	font-size: calc(14px + 0.6vw);
+}
+
+.clickable:hover {
+	cursor: pointer;
+	border-bottom: #1a2930 solid 2px;
 }
 
 .deck {
@@ -75,12 +100,27 @@ h1 {
 	-webkit-transform: scaleX(-1);
 }
 
+.card-icon {
+	visibility: hidden;
+	font-size: 2em;
+}
+
 .mirror {
 	visibility: visible;
 }
 
 .card.matched {
 	background-color: #0a1612;
+}
+
+footer {
+	background-color: #0a1612;
+	color: white;
+	font-size: 11px;
+	padding: 6px;
+	width: 100%;
+	margin: 0;
+	margin-top: 12px;
 }
 
 .win-modal {
