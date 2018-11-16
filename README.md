@@ -1,7 +1,9 @@
 # Memory Game
-A memory game web application; this game displays number of moves as well as a timer.
+A responsive memory game web application; this game displays number of moves as well as a timer.
 
-## About Game
+![Memory Game Screenshot](memorygame.png)
+
+## About the Game
 ### How to Play
 You task is to match pairs of cards. Playing is very simple - you turn over one card and then try to find a matching card. You can choose from various deck options.
 
