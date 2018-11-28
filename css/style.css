@@ -31,7 +31,7 @@ h3 {
 
 .container {
 	display: flex;
-	max-width: 560px;
+	max-width: 550px;
 	width: 85vw;
 	margin: auto;
 	align-items: center;
@@ -40,10 +40,13 @@ h3 {
 
 .select-deck {
 	border-radius: 6px;
-	padding: 4px;
+	padding: 4px 2px;
 	width: 100%;
 	margin-bottom: 0;
-	background-color: #d3cecf
+	background-color: #d3cecf;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .selected {
@@ -52,13 +55,23 @@ h3 {
 
 .select-deck > i {
 	font-size: 1.25em;
-	padding: 4px 8px;
+	padding: 4px 4px;
 }
 
 .panel-item {
 	float: left;
 	width: 25%;
 	font-size: calc(14px + 0.6vw);
+}
+
+.time,
+.star,
+.moves-h {
+	width: 30%;
+}
+
+.reset {
+	width: 10%;
 }
 
 .clickable:hover {
@@ -84,7 +97,7 @@ h3 {
 	max-width: 120px;
 	font-size: calc(12px + 0.5vw);
 	border-radius: 6px;
-	background-color: #1a2930;
+	background-color: #243B47;
 	color: white;
 	display: flex;
 	align-items: center;
@@ -94,7 +107,9 @@ h3 {
 }
 
 .card.open {
-	background-color: #406c84;
+	background-color: #4F86A8;
+	/*background-color: white;*/
+	/*color: black;*/
 	-webkit-transform: rotateY(180deg); /* Safari */
 	transform: rotateY(180deg);
 }
@@ -116,6 +131,7 @@ h3 {
 
 .card.matched {
 	background-color: #0a1612;
+
 }
 
 .fastest {
@@ -124,6 +140,7 @@ h3 {
 
 .fastest.show {
 	display: block;
+	padding: 8px;
 }
 
 
@@ -189,17 +206,17 @@ footer {
 	padding: 1.5em;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) {
 	.time,
 	.star,
-	.moves-h {
-		width: 30%;
-	}
-
+	.moves-h,
 	.reset {
-		width: 10%;
+		width: 25%;
 	}
 
+	.select-deck > i {
+		padding: 4px 10px;
+	}
 }
 
 @media only screen and (min-width: 1200px) {
