@@ -1,3 +1,7 @@
+<a href="https://search.google.com/test/mobile-friendly?utm_source=mft&utm_medium=redirect&utm_campaign=mft-redirect&id=d1byO7MNBv5oL4m9nKBV1Q">
+        <img src="mobile friendly.svg"
+            alt="mobile-friendly badge"></a>
+            
 # Memory Game
 A responsive, feature packed memory game web application.
 
